@@ -38,6 +38,7 @@ public class main extends VisibleWord {
 					 a.print();
 						break;
 						
+						
 				 case "Exercise":
 					 a.runExercise(sc, 0, 0);
 					 /*a.displayExercise();

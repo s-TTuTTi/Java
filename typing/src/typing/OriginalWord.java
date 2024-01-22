@@ -18,6 +18,7 @@ public class OriginalWord {
 		return "a";
 	}
 
+	
 	// to set originalWord
 	public void setOriginalWord(String originalWord) {
 

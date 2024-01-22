@@ -30,6 +30,7 @@ package typing;
 
 	    	System.out.print("Enter the sentence : ");
 			return false;
+			
 	 
 	    }
 

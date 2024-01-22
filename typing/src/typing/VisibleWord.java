@@ -19,6 +19,7 @@ public class VisibleWord extends OriginalWord{
 	public VisibleWord(String originalWord, String visibleWord) {
 
 	}
+	
 
 	// to return visibleWord
 	public String getVisibleWord() {
