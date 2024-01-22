@@ -16,6 +16,7 @@ package typing;
 	    // constructor
 	    public WordManager() {
 	 
+	    	
 	     }
 
 	    // constructor, size indicates the initial size of vector

@@ -10,6 +10,7 @@ public class OriginalWord {
 	// constructor
 	public OriginalWord(String originalWord) {
 
+
 	}
 
 	// to return originalWord

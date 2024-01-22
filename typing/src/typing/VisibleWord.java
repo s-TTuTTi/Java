@@ -12,6 +12,7 @@ public class VisibleWord extends OriginalWord{
 	// constructor
 	public VisibleWord(String originalWord) {
 
+		
 	}
 
 	// constructor
