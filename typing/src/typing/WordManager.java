@@ -42,11 +42,33 @@ package typing;
 
 	    // to load words from the file and insert new VisibleWord object to wordPool vector.
 	    // if the insertion is successfully completed, return true. otherwise return false.
-	    public boolean load(String fileName) {
-	    	System.out.print("Enter the file name : ");
-	    	System.out.print("File load is completed!!");
-	    	
-	    	return false;
+	    public boolean load(String filename) {
+		Scanner sc = new Scanner();
+		String content = "";
+
+		System.out.print("Enter the file name : ");
+		filename = sc.next();
+		File loadFile = new File(filename);
+		
+		try{
+			BufferedReader fileReader = new BufferedReader(new FileReader(loadFile));
+		content = fileReader.readLine();
+			while(content != null){
+				wordPool.add(content);
+				content = fileReader.readLine();
+			}
+			System.out.print("File load is completed!!");
+			fileReader.close();
+		}catch(FileNotFoundException e){
+			e.getStackTrace();
+			System.out.print("File can't find");
+		}catch(IOException e){
+			e.getStackTrace();
+			System.out.print("File load is fail!");
+		}
+
+		
+	return false;
 	   }
 
 	    // if the value of originalWord is findWord, replace the value of visibleWord to replaceWord
