@@ -42,7 +42,8 @@ public class main extends VisibleWord {
 					 a.runExercise(sc, 0, 0);
 					 /*a.displayExercise();
 					 a.makeExercise(0, 0); */
-						break;
+					System.out.print("hi");	
+					 break;
 						
 				 case "Exit": 
 					 System.out.print("Program terminates");
