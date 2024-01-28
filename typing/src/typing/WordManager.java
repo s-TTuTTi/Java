@@ -15,7 +15,7 @@ package typing;
 
 	    // constructor
 	    public WordManager() {
-	    	File file;
+	    	 
 	    	
 	     }
 
@@ -46,27 +46,38 @@ package typing;
 	    public String[] divideWords(String sentence) {
 	    	return null; 
 	    }
+	    
+	    
 
 	    // to load words from the file and insert new VisibleWord object to wordPool vector.
 	    // if the insertion is successfully completed, return true. otherwise return false.
 	    public boolean load() throws IOException{ 
-			int i = 0;
+			int i = 0, j = 0;
 			String filename = "";
-			String currentDirectory = System.getProperty("user.dir");
+			String content = "";
+			//String currentDirectory = System.getProperty("user.dir");
 			File fileLoad = null;
 			FileReader fileReader = null;
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+			
+			OriginalWord ow = new OriginalWord(); 
+			VisibleWord vw = new VisibleWord();
+			wordPool = new Vector<VisibleWord>();
 			
 			System.out.print("Enter the file name : ");
 			filename = br.readLine();
 			fileLoad = new File(filename);
 			
-			String content ="";
 			try {fileReader = new FileReader(fileLoad);
-				while((i=fileReader.read())!=-1) {
-					content = content + i;
+				while((i=fileReader.read())!=-1) { 
+					content = content + (char) i;
 				}
-				System.out.println("File load is completed!!");				
+				
+				ow.setOriginalWord(content); 
+				vw = new VisibleWord(content);
+				wordPool.add(vw);
+				System.out.println("File load is completed!!");	 
+				
 			}catch(FileNotFoundException e){
 				e.printStackTrace();
 				System.out.println("File can't find");
@@ -98,25 +109,14 @@ package typing;
 
 	    // to print all data
 	    // you have to use size and get method of Vector class
-	    public void print(File file) {
-	    	String str; 
-	    	int i = 0;
-	    	int num = 0;
-	    	FileReader fileReader = null;   
-	    	try {fileReader = new FileReader(file);
-	    		while((i = fileReader.read()) != -1) {
-	    			System.out.println((char)i);
-	    			num ++;
-	    		}
-	    		
-	    	}catch(FileNotFoundException e){
-				e.printStackTrace();
-				System.out.println("File can't find");
-			}catch(IOException e){
-				e.printStackTrace();
-				System.out.println("File load is fail!");
-				}
-	    	System.out.println("word(s) aree stored as follows : "+num);
+	    public void print() {
+	    	String content = "";
+	    	for(VisibleWord vw : wordPool) {
+	    		System.out.println(vw.getVisibleWord());
+	    		content = vw.getVisibleWord();
+	    	}
+	    	
+	    	System.out.println("word(s) aree stored as follows : " + content.length() );
 	    	
 	    }
 

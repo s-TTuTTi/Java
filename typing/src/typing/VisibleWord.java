@@ -5,30 +5,32 @@ public class VisibleWord extends OriginalWord{
 	private String visibleWord;
 
 	// constructor
-	public VisibleWord() { 
-		
+	public VisibleWord() {  
+		super();
+		this.visibleWord = "";
 	}
 
 	// constructor
 	public VisibleWord(String originalWord) {
-
-		
+		super(originalWord); 
+        this.visibleWord = originalWord;
 	}
 
 	// constructor
 	public VisibleWord(String originalWord, String visibleWord) {
-
+		super(originalWord);  // Calls the constructor of OriginalWord with a parameter
+        this.visibleWord = visibleWord;
 	}
 	
 
 	// to return visibleWord
 	public String getVisibleWord() {
-		return "a";
+		return visibleWord;
 	}
 
 	// to set visibleWord
 	public void setVisibleWord(String visibleWord) {
-
+		this.visibleWord = visibleWord;
 	}
 	
 	// to set originalWord and visibleWord simultaneously
