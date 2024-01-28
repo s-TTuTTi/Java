@@ -1,33 +1,35 @@
 package typing;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class main extends VisibleWord {
 
-	public static void main(String[] args) { 
+	public static void main(String[] args) throws IOException { 
 		Scanner sc = new Scanner(System.in);
 		String c;
-		String filename = "";
-		WordManager a = new WordManager( );
-		
+		WordManager a = new WordManager();
+		String word;
+    
+
 		while(true) {
-			System.out.print("Enter the Command(Insert, Load, Replace, Delete, Restore, Print, Exercise, Exit)");
+			System.out.println("Enter the Command(Insert, Load, Replace, Delete, Restore, Print, Exercise, Exit)");
 			 c = sc.next();
 			 switch(c) {
 				 case "Insert":
-					 a.load(filename);
+
 					  break;			
 					  
 				 case "Load":
-					 a.load(filename);
+					 a.load();
+					 
 				break;
 				
-				 case "Replace":
-					 a.replace(filename, c);
+				 case "Replace": 
 						break;
 						
-				 case "Delete":
-					 a.delete(filename);
+				 case "Delete": 
 						break;
 						
 				 case "Restore":

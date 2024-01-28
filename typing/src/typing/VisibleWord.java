@@ -5,8 +5,8 @@ public class VisibleWord extends OriginalWord{
 	private String visibleWord;
 
 	// constructor
-	public VisibleWord() {
-
+	public VisibleWord() { 
+		
 	}
 
 	// constructor

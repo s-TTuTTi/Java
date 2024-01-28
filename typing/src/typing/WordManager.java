@@ -1,12 +1,12 @@
 package typing;
  
 	import java.io.BufferedReader;
+	import java.io.File;
 	import java.io.FileNotFoundException;
 	import java.io.FileReader;
 	import java.io.IOException;
-	import java.util.Iterator;
+	import java.io.InputStreamReader;
 	import java.util.Scanner;
-	import java.util.StringTokenizer;
 	import java.util.Vector;
 
  public class WordManager {
@@ -15,7 +15,7 @@ package typing;
 
 	    // constructor
 	    public WordManager() {
-	 
+	    	File file;
 	    	
 	     }
 
@@ -27,9 +27,16 @@ package typing;
 	    // to insert new VisibleWord object to wordPool vector.
 	    // if the insertion is successfully completed, return true. otherwise return false.
 	    public boolean insert(String sentence) {
-
+	    	
 	    	System.out.print("Enter the sentence : ");
-			return false;
+	    	
+	    	if(sentence != null) {
+	    		return true;
+	    	}
+	    	else {
+	    		return false;
+	    	}
+			
 			
 	 
 	    }
@@ -42,34 +49,34 @@ package typing;
 
 	    // to load words from the file and insert new VisibleWord object to wordPool vector.
 	    // if the insertion is successfully completed, return true. otherwise return false.
-	    public boolean load(String filename) {
-		Scanner sc = new Scanner();
-		String content = "";
-
-		System.out.print("Enter the file name : ");
-		filename = sc.next();
-		File loadFile = new File(filename);
-		
-		try{
-			BufferedReader fileReader = new BufferedReader(new FileReader(loadFile));
-		content = fileReader.readLine();
-			while(content != null){
-				wordPool.add(content);
-				content = fileReader.readLine();
-			}
-			System.out.print("File load is completed!!");
+	    public boolean load() throws IOException{ 
+			int i = 0;
+			String filename = "";
+			String currentDirectory = System.getProperty("user.dir");
+			File fileLoad = null;
+			FileReader fileReader = null;
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			
+			System.out.print("Enter the file name : ");
+			filename = br.readLine();
+			fileLoad = new File(filename);
+			
+			String content ="";
+			try {fileReader = new FileReader(fileLoad);
+				while((i=fileReader.read())!=-1) {
+					content = content + i;
+				}
+				System.out.println("File load is completed!!");				
+			}catch(FileNotFoundException e){
+				e.printStackTrace();
+				System.out.println("File can't find");
+			}catch(IOException e){
+				e.printStackTrace();
+				System.out.println("File load is fail!");
+				}
 			fileReader.close();
-		}catch(FileNotFoundException e){
-			e.getStackTrace();
-			System.out.print("File can't find");
-		}catch(IOException e){
-			e.getStackTrace();
-			System.out.print("File load is fail!");
+			return false;
 		}
-
-		
-	return false;
-	   }
 
 	    // if the value of originalWord is findWord, replace the value of visibleWord to replaceWord
 	    // return the number of replaced words.
@@ -91,8 +98,25 @@ package typing;
 
 	    // to print all data
 	    // you have to use size and get method of Vector class
-	    public void print() { 
-	    	System.out.print("word(s) aree stored as follows : ");
+	    public void print(File file) {
+	    	String str; 
+	    	int i = 0;
+	    	int num = 0;
+	    	FileReader fileReader = null;   
+	    	try {fileReader = new FileReader(file);
+	    		while((i = fileReader.read()) != -1) {
+	    			System.out.println((char)i);
+	    			num ++;
+	    		}
+	    		
+	    	}catch(FileNotFoundException e){
+				e.printStackTrace();
+				System.out.println("File can't find");
+			}catch(IOException e){
+				e.printStackTrace();
+				System.out.println("File load is fail!");
+				}
+	    	System.out.println("word(s) aree stored as follows : "+num);
 	    	
 	    }
 
@@ -117,7 +141,7 @@ package typing;
 	    }
 
 	    // run exercise using makeExercise, checkAnswer, and displayExercise method until user enter all correct words
-	    public void runExercise(Scanner scanner, int countOfWord, int widthOfLine) {
+	    public void runExercise(Scanner sc, int countOfWord, int widthOfLine) {
 
 	    }
 
