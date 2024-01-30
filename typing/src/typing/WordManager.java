@@ -21,24 +21,22 @@ package typing;
 
 	    // constructor, size indicates the initial size of vector
 	    public WordManager(int size) {
-	 
+
 	    }
 
 	    // to insert new VisibleWord object to wordPool vector.
 	    // if the insertion is successfully completed, return true. otherwise return false.
 	    public boolean insert(String sentence) {
-	    	
-	    	System.out.print("Enter the sentence : ");
+	    	VisibleWord visibleWord = new VisibleWord(sentence);
 	    	
 	    	if(sentence != null) {
+	    		wordPool.add(visibleWord);
+	    		System.out.println("Data insertion is completed!!");
 	    		return true;
 	    	}
 	    	else {
 	    		return false;
 	    	}
-			
-			
-	 
 	    }
 
 	    // to divide sentence to words, and words are stored in String array.
@@ -54,28 +52,38 @@ package typing;
 	    public boolean load() throws IOException{ 
 			int i = 0, j = 0;
 			String filename = "";
-			String content = "";
+			String contentOfFile = "";
+			String wordSpace [];
 			//String currentDirectory = System.getProperty("user.dir");
+			
 			File fileLoad = null;
 			FileReader fileReader = null;
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
 			
-			OriginalWord ow = new OriginalWord(); 
-			VisibleWord vw = new VisibleWord();
-			wordPool = new Vector<VisibleWord>();
+			OriginalWord originalWord = new OriginalWord();
+			VisibleWord visibleWord = new VisibleWord();
+			wordPool = new Vector<VisibleWord>(); 
 			
 			System.out.print("Enter the file name : ");
 			filename = br.readLine();
 			fileLoad = new File(filename);
 			
-			try {fileReader = new FileReader(fileLoad);
+			try {
+				fileReader = new FileReader(fileLoad);
 				while((i=fileReader.read())!=-1) { 
-					content = content + (char) i;
-				}
+					contentOfFile = contentOfFile + (char) i;		
+				}	
 				
-				ow.setOriginalWord(content); 
-				vw = new VisibleWord(content);
-				wordPool.add(vw);
+				wordSpace = contentOfFile.split("\\t|\\n");
+				
+				for(int a = 0 ; a < wordSpace.length ; a++) {
+					visibleWord = new VisibleWord(); 
+					visibleWord.setVisibleWord(wordSpace[a].trim());
+					wordPool.add(visibleWord);
+				}
+
+				System.out.println(wordPool.capacity());	
+			
 				System.out.println("File load is completed!!");	 
 				
 			}catch(FileNotFoundException e){
@@ -84,8 +92,10 @@ package typing;
 			}catch(IOException e){
 				e.printStackTrace();
 				System.out.println("File load is fail!");
-				}
-			fileReader.close();
+			}finally {
+				if(fileReader != null) 
+					fileReader.close();
+			}
 			return false;
 		}
 
@@ -93,13 +103,33 @@ package typing;
 	    // return the number of replaced words.
 	    // you have to use Iterator for searching the vector
 	    public int replace(String findWord, String replaceWord) {
-	    	return 1;
+	    	int replaceCount = 0;
+	    	for (VisibleWord word : wordPool) {
+	    		 if(word.getVisibleWord().equals(findWord.trim())) {
+	    			 replaceCount ++;
+	    			 word.setVisibleWord(replaceWord);
+	    		 }	
+	    	 }
+	    	if (replaceCount > 0) {
+	    		return replaceCount;
+	    	}else
+	    		return 0;
 	    }
 
 	    // to delete Visible object whose originalWord is word
 	    // return the number of deleted words.
-	    public int delete(String word) {
-	    	return 2;
+	    public int delete(String deleteWord) {
+	    	int deleteCount = 0;
+	    	for (VisibleWord word : wordPool) {
+	    		 if(word.getVisibleWord().equals(deleteWord.trim())) {
+	    			 deleteCount ++; 
+	    			 word.setVisibleWord(null);
+	    		 }	
+	    	 }
+	    	if (deleteCount > 0) {
+	    		return deleteCount;
+	    	}else
+	    		return 0;
 	    }
 
 	    // to set visibleWord value to originalWord value for all words
@@ -110,16 +140,16 @@ package typing;
 	    // to print all data
 	    // you have to use size and get method of Vector class
 	    public void print() {
-	    	String content = "";
-	    	for(VisibleWord vw : wordPool) {
-	    		System.out.println(vw.getVisibleWord());
-	    		content = vw.getVisibleWord();
-	    	}
-	    	
-	    	System.out.println("word(s) aree stored as follows : " + content.length() );
-	    	
+	    	 for (VisibleWord word : wordPool) {
+	    	        System.out.println(word.getVisibleWord()+" ");
+	    	    } 
+	    	 System.out.println();
+				
 	    }
 
+	    
+	    
+	    
 	    // make a problem from wordPool vector for typing practice
 	    // the length of white space is randomly determined, and the length is rounded.
 	    // return the String includes words and white space
