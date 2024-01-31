@@ -35,13 +35,19 @@ public class VisibleWord extends OriginalWord{
 	
 	// to set originalWord and visibleWord simultaneously
 	public void insert(String word) {
-
+		this.visibleWord = word;
+		super.setOriginalWord(word);
+		
 	}
 	
 	// if otherWord is same to visibleWord, return true.
 	// otherwise, return false. 
 	public boolean isSameVisibleWord(String otherWord) {
-		return true;
+		
+		if(visibleWord.equals(otherWord)) 
+			return true;
+		else	
+			return false;
 	}
 	
 	// copy originalWord and visibleWord from otherWord object
@@ -51,12 +57,13 @@ public class VisibleWord extends OriginalWord{
 	
 	// initialize originalWord and visibleWord 
 	public void initialize() {
-
+		setVisibleWord(null);
+		setOriginalWord(null);
 	}
 
 	// to return string for this object. The format is as follows.
 	// originalWord = originalWord value, visibleWord = visibleWord value
 	public String toString() {
-		return "a";
+		return visibleWord;
 	}
 }

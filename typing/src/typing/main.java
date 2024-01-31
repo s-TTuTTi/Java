@@ -1,17 +1,17 @@
 package typing;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class main extends VisibleWord {
+public class main {
 
-	public static void main(String[] args) throws IOException { 
+	public void main(String[] args) throws IOException { 
 		Scanner sc = new Scanner(System.in);
 		String c;
 		WordManager a = new WordManager();
 		
 		String insertWord = "";
+		
+		String filename = "";
 		
 		String findWord = "";
 		String replaceWord = "";
@@ -32,7 +32,10 @@ public class main extends VisibleWord {
 					  break;
 					  
 				 case "Load":
-					 a.load();
+					 System.out.print("Enter the file name : ");
+					filename = sc.next();
+					a.load(filename);
+					
 					 break;
 				
 				 case "Replace": 
@@ -52,13 +55,12 @@ public class main extends VisibleWord {
 					 System.out.print("Delete what : ");
 					 deleteWord = sc.next();
 					 deleteWordCount = a.delete(deleteWord);
-					 
-					 if(deleteWordCount > 0)
-						 System.out.printf("%d word(s) are deleted.\n",a);
+					 if(deleteWordCount == 0)
+						 System.out.printf("Can not find \"%s\"\n",deleteWord);
 					 else
-						 System.out.printf("Can not find \"%s\"\n",findWord);
-					break;
-
+						 System.out.println(deleteWordCount+" Word(s) are stored as follows");
+					 
+					 break;
 				 case "Restore":
 					 a.restore();
 					 System.out.print("original word(s) are restored"); 

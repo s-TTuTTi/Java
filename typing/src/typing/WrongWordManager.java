@@ -7,17 +7,17 @@ package typing;
 	import java.util.Scanner;
 	import java.util.Vector;
 
- public class WordManager {
+ public class WrongWordManager {
 	    private Vector<VisibleWord> wordPool;           // a total of words
 	    
 	    private Vector<String> exercisePool;       // words for exercise
 
 	    // constructor
-	    public WordManager() {	
+	    public WrongWordManager() {	
 	     }
 
 	    // constructor, size indicates the initial size of vector
-	    public WordManager(int size) {
+	    public WrongWordManager(int size) {
 
 	    }
 
@@ -55,8 +55,7 @@ package typing;
 			
 			File fileLoad = null;
 			FileReader fileReader = null;
-			VisibleWord visibleWord = new VisibleWord();
-			
+			VisibleWord visibleWord;
 			wordPool = new Vector<VisibleWord>(); 
 			
 			fileLoad = new File(filename);
@@ -67,13 +66,14 @@ package typing;
 					contentOfFile = contentOfFile + (char) i;		
 				}	
 				
+				visibleWord = new VisibleWord(contentOfFile);
+				
 				wordSpace = divideWords(contentOfFile);
 				
 				for(int a = 0 ; a < wordSpace.length ; a++) {
 					if(wordSpace[a] != "") {
 						visibleWord = new VisibleWord(); 
 						visibleWord.setVisibleWord(wordSpace[a].trim());
-
 						wordPool.add(visibleWord);
 					}
 				}

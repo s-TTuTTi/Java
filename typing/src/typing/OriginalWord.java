@@ -4,7 +4,7 @@ public class OriginalWord {
 
 	// constructor
 	public OriginalWord() {
-		this.originalWord = "";
+		originalWord = "";
 	}
 
 	// constructor
@@ -27,12 +27,15 @@ public class OriginalWord {
 	// if otherWord is same to originalWord, return true.
 	// otherwise, return false. 
 	public boolean isSameOriginalWord(String otherWord) {
-		return this.originalWord.equals(otherWord);
+		if(this.originalWord.equals(otherWord))
+			return true;
+		else
+			return false;
 	}
 
 	// to return string for this object. The format is as follows.
 	// originalWord = originalWord value
 	public String toString() {
-		return "a";
+		return originalWord;
 	}
 }
