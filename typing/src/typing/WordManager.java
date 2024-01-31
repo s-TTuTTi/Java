@@ -14,11 +14,12 @@ package typing;
 
 	    // constructor
 	    public WordManager() {	
+	        wordPool = new Vector<>();
 	     }
 
 	    // constructor, size indicates the initial size of vector
 	    public WordManager(int size) {
-
+	    	wordPool = new Vector<>(size);
 	    }
 
 	    // to insert new VisibleWord object to wordPool vector.
@@ -71,9 +72,7 @@ package typing;
 				
 				for(int a = 0 ; a < wordSpace.length ; a++) {
 					if(wordSpace[a] != "") {
-						visibleWord = new VisibleWord(); 
-						visibleWord.setVisibleWord(wordSpace[a].trim());
-
+						visibleWord = new VisibleWord(wordSpace[a].trim()); 
 						wordPool.add(visibleWord);
 					}
 				}
@@ -129,16 +128,16 @@ package typing;
 	    // to set visibleWord value to originalWord value for all words
 	    public void restore() {
 	    	VisibleWord visibleWord = new VisibleWord(); 
-
-	    	String contentOfFile = visibleWord.getOriginalWord();
-	    	String[] wordSpace = divideWords(contentOfFile);
 	    	
-	    	wordPool.clear();
+			for(int a = 0 ; a < wordPool.size() ; a++) {
+				originalWord = wordPool.get(a).getOriginalWord();
+				wordPool.get(a).setVisibleWord(originalWord);
+			}
 			
-			for(int a = 0 ; a < wordSpace.length ; a++) {
-				visibleWord = new VisibleWord(); 
-				visibleWord.setVisibleWord(wordSpace[a].trim());
-				wordPool.add(visibleWord);
+			for(int a = 0 ; a < wordPool.size() ; a++) {
+				originalWord = wordPool.get(a).getOriginalWord();
+				visibleWord.setVisibleWord(originalWord);
+				wordPool.add(a,visibleWord);
 			}
 			
 	    	System.out.println("original word(s) are restored");
