@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 public class main {
 
-	public void main(String[] args) throws IOException { 
+	public static void main(String[] args) throws IOException { 
 		Scanner sc = new Scanner(System.in);
-		String c;
-		WordManager a = new WordManager();
+		String menu;
+		WordManager wordManager = new WordManager();
 		
 		String insertWord = "";
 		
@@ -20,21 +20,24 @@ public class main {
 		String deleteWord = "";
 		int deleteWordCount = 0;
 		
+		int cntOfWords = 0;
+		int widthOfLines = 0;
+		
 		 
 		while(true) {
 			System.out.println("Enter the Command(Insert, Load, Replace, Delete, Restore, Print, Exercise, Exit)");
-			 c = sc.next();
-			 switch(c) {
+			 menu = sc.next();
+			 switch(menu) {
 				 case "Insert":
 					 System.out.print("Enter the sentence : ");
 					 insertWord = sc.next();
-					 a.insert(insertWord);
+					 wordManager.insert(insertWord);
 					  break;
 					  
 				 case "Load":
 					 System.out.print("Enter the file name : ");
 					filename = sc.next();
-					a.load(filename);
+					wordManager.load(filename);
 					
 					 break;
 				
@@ -43,7 +46,8 @@ public class main {
 					 findWord = sc.next();
 					 System.out.print("Replace with : ");
 					 replaceWord = sc.next();
-					 replaceWordCount = a.replace(findWord,replaceWord);
+					 
+					 replaceWordCount = wordManager.replace(findWord,replaceWord);
 					 if(replaceWordCount > 0)
 						 System.out.printf("%d word(s) are replaced from experience to Test\n",replaceWordCount);
 					 else
@@ -54,26 +58,31 @@ public class main {
 				 case "Delete": 
 					 System.out.print("Delete what : ");
 					 deleteWord = sc.next();
-					 deleteWordCount = a.delete(deleteWord);
-					 if(deleteWordCount == 0)
-						 System.out.printf("Can not find \"%s\"\n",deleteWord);
-					 else
-						 System.out.println(deleteWordCount+" Word(s) are stored as follows");
 					 
-					 break;
+					 deleteWordCount = wordManager.delete(deleteWord);
+					 if(deleteWordCount > 0)
+						 System.out.println(deleteWordCount+" Word(s) are stored as follows");	 
+					 else
+						 System.out.printf("Can not find \"%s\"\n",deleteWord); 
+					break;
+						
 				 case "Restore":
-					 a.restore();
+					 wordManager.restore();
 					 System.out.print("original word(s) are restored"); 
 					break;
 						
 				 case "Print":
-					 a.print();
-						break;
+					 wordManager.print();
+					break;
 						
 				 case "Exercise":
-					 a.runExercise(sc, 0, 0);
-					 /*a.displayExercise();
-					 a.makeExercise(0, 0); */
+					 System.out.print("Count of words : ");
+					 cntOfWords = sc.nextInt();
+					 System.out.print("width of words : ");
+					 widthOfLines = sc.nextInt();
+					 System.out.print("\n");
+					 
+					 wordManager.runExercise(sc, cntOfWords, widthOfLines); 
 					 break;
 						
 				 case "Exit": 
@@ -81,6 +90,7 @@ public class main {
 					 System.exit(0);
 					 // 강제로 종료
 					 break;
+					 
 				default:
 					System.out.println("Wrong Command");
 					break;

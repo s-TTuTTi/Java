@@ -35,15 +35,14 @@ public class VisibleWord extends OriginalWord{
 	
 	// to set originalWord and visibleWord simultaneously
 	public void insert(String word) {
-		this.visibleWord = word;
-		super.setOriginalWord(word);
+		setVisibleWord(word);
+		setOriginalWord(word);
 		
 	}
 	
 	// if otherWord is same to visibleWord, return true.
 	// otherwise, return false. 
 	public boolean isSameVisibleWord(String otherWord) {
-		
 		if(visibleWord.equals(otherWord)) 
 			return true;
 		else	
