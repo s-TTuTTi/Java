@@ -65,6 +65,7 @@ import java.util.Scanner;
 			VisibleWord visibleWord = new VisibleWord(); 
 			
 			filename = currentDirectory + "\\" + filename;
+
 			fileLoad = new File(filename);
 			
 			try {
@@ -127,14 +128,6 @@ import java.util.Scanner;
 	    	            wordPool.get(i).initialize();
 	    	        }
 	    	    }
-	          // null 삭제        
-	    	  Iterator<VisibleWord> iterator = wordPool.iterator();       
-	    	  while (iterator.hasNext()) {            
-	    		  if (iterator.next() == null) {                
-	    			  iterator.remove();            
-	    		}
-	    		  
-	    	  }
 	    	  if (deleteCount > 0) {
 	    		return deleteCount;
 	    	}else
@@ -156,12 +149,16 @@ import java.util.Scanner;
 	    // to print all data
 	    // you have to use size and get method of Vector class
 	    public void print() {
+	    	int size = 0;
 	    	 for (VisibleWord word : wordPool) {
-	    		 if(word.getVisibleWord() != "")
+	    		 if(word.getVisibleWord() != null) {
 	    	        System.out.print(word.getVisibleWord()+" ");
+	    	        size ++;
+	    		 }
 	    	    } 
-	    	 System.out.println();	 
-	    	 System.out.println(wordPool.size()+" Word(s) are stored as follows");
+	    	 System.out.println();
+	           
+	    	 System.out.println(size+" Word(s) are stored as follows");
 	    }
 
 	    
@@ -208,14 +205,6 @@ import java.util.Scanner;
     	        	exercisePool.set(i,"");
     	        }
     	    }
-//	    	 for (int i = 0; i < wordPool.size(); i++) {
-//	    	        if (wordPool.get(i).getVisibleWord().equals(deleteWord.trim())) {
-//	    	            deleteCount++;
-//	    	            visibleWord.initialize();
-//	    	            wordPool.get(i).initialize();
-//	    	        }
-//	    	    }
-//	
 	    	return rightWordCnt;
 	    }
 
